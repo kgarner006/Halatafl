@@ -1,0 +1,81 @@
+cmake_minimum_required(VERSION 3.14)
+project(Halatafl)
+
+set(CMAKE_CXX_STANDARD 17)
+
+# add targets
+add_library(Halatafl_lib Sources/board.cpp Sources/fox.cpp Sources/main.cpp Sources/manager.cpp Sources/sheep.cpp)
+target_include_directories(Halatafl_lib PRIVATE include/)
+
+# add executable
+add_executable(Halatafl Sources/board.cpp Sources/fox.cpp Sources/main.cpp Sources/manager.cpp Sources/sheep.cpp)
+target_include_directories(Halatafl PRIVATE include/)
+
+# add testing
+enable_testing()
+
+add_executable(testFoxDoubleJump tests/testFoxDoubleJump.cpp)
+target_link_libraries(testFoxDoubleJump Halatafl_lib)
+target_include_directories(testFoxDoubleJump PRIVATE include)
+
+add_executable(testFoxSingleJump tests/testFoxSingleJump.cpp)
+target_link_libraries(testFoxSingleJump Halatafl_lib)
+target_include_directories(testFoxSingleJump PRIVATE include)
+
+add_executable(testFoxesWin tests/testFoxesWin.cpp)
+target_link_libraries(testFoxesWin Halatafl_lib)
+target_include_directories(testFoxesWin PRIVATE include)
+
+add_executable(testFoxesWinAfterMove tests/testFoxesWinAfterMove.cpp)
+target_link_libraries(testFoxesWinAfterMove Halatafl_lib)
+target_include_directories(testFoxesWinAfterMove PRIVATE include)
+
+add_executable(testFoxSurrounded tests/testFoxSurrounded.cpp)
+target_link_libraries(testFoxSurrounded Halatafl_lib)
+target_include_directories(testFoxSurrounded PRIVATE include)
+
+add_executable(testSheepMoveBackwards tests/testSheepMoveBackwards.cpp)
+target_link_libraries(testSheepMoveBackwards Halatafl_lib)
+target_include_directories(testSheepMoveBackwards PRIVATE include)
+
+add_executable(testSheepMoveDiagonally tests/testSheepMoveDiagonally.cpp)
+target_link_libraries(testSheepMoveDiagonally Halatafl_lib)
+target_include_directories(testSheepMoveDiagonally PRIVATE include)
+
+add_executable(testSheepMoveForward tests/testSheepMoveForward.cpp)
+target_link_libraries(testSheepMoveForward Halatafl_lib)
+target_include_directories(testSheepMoveForward PRIVATE include)
+
+add_executable(testSheepMoveNonExistent tests/testSheepMoveNonExistent.cpp)
+target_link_libraries(testSheepMoveNonExistent Halatafl_lib)
+target_include_directories(testSheepMoveNonExistent PRIVATE include)
+
+add_executable(testSheepMoveOffBoard tests/testSheepMoveOffBoard.cpp)
+target_link_libraries(testSheepMoveOffBoard Halatafl_lib)
+target_include_directories(testSheepMoveOffBoard PRIVATE include)
+
+add_executable(testSheepMoveSideways tests/testSheepMoveSideways.cpp)
+target_link_libraries(testSheepMoveSideways Halatafl_lib)
+target_include_directories(testSheepMoveSideways PRIVATE include)
+
+add_executable(testSheepMoveSidewaysBlocked tests/testSheepMoveSidewaysBlocked.cpp)
+target_link_libraries(testSheepMoveSidewaysBlocked Halatafl_lib)
+target_include_directories(testSheepMoveSidewaysBlocked PRIVATE include)
+
+add_executable(testSheepWin tests/testSheepWin.cpp)
+target_link_libraries(testSheepWin Halatafl_lib)
+target_include_directories(testSheepWin PRIVATE include)
+
+add_test(TestFoxDoubleJump testFoxDoubleJump)
+add_test(TestFoxSingleJump testFoxSingleJump)
+add_test(TestFoxesWin testFoxesWin)
+add_test(TestFoxesWinAfterMove testFoxesWinAfterMove)
+add_test(TestFoxSurrounded testFoxSurrounded)
+add_test(TestSheepMoveBackwards testSheepMoveBackwards)
+add_test(TestSheepMoveDiagonally testSheepMoveDiagonally)
+add_test(TestSheepMoveForward testSheepMoveForward)
+add_test(TestSheepMoveNonExistent testSheepMoveNonExistent)
+add_test(TestSheepMoveOffBoard testSheepMoveOffBoard)
+add_test(TestSheepMoveSideways testSheepMoveSideways)
+add_test(TestSheepMoveSidewaysBlocked testSheepMoveSidewaysBlocked)
+add_test(TestSheepWin testSheepWin)
