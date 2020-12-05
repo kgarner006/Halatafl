@@ -23,7 +23,7 @@ jobs:
     
     - name: Run-Cpp-check
       shell: bash
-      run: cppcheck --enable=all --check-config --suppress=missingIncludeSystem --bug-hunting Sources/ -Iinclude
+      run: cppcheck --enable=all --check-config --suppress=missingIncludeSystem Sources/ -Iinclude
 
     - name: Create-Build-Environment
       run: cmake -E make_directory ${{runner.workspace}}/build
