@@ -1,13 +1,12 @@
 #ifndef SHEEP_H_INCLUDED
 #define SHEEP_H_INCLUDED
 
-#include <iostream>
 #include "board.h"
+#include <iostream>
 
 class sheep
 {
-    public:
-
+public:
     sheep();
 
     // Function used to calculate and return number of sheep on game board
@@ -20,7 +19,6 @@ class sheep
     //// to enter a legal position until the user does so.*/
     void userInput(char gameBoard[7][7], std::istream& in);
 };
-
 
 
 #endif // SHEEP_H_INCLUDED

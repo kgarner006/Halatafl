@@ -9,37 +9,30 @@ using namespace std;
 ///// The "board.h" public board array is the array that will be checked.*/
 bool paddockFilled(char gameBoard[7][7])
 {
-	////// If the number of sheep in the "paddock" area is nine, then return true. Otherwise, return false.
-	if (gameBoard[0][2] == 'S' && gameBoard[0][3] == 'S' && gameBoard[0][4] == 'S'
-     && gameBoard[1][2] == 'S' && gameBoard[1][3] == 'S' && gameBoard[1][4] == 'S'
-     && gameBoard[2][2] == 'S' && gameBoard[2][3] == 'S' && gameBoard[2][4] == 'S')
-     {
+    ////// If the number of sheep in the "paddock" area is nine, then return true. Otherwise, return false.
+    if (gameBoard[0][2] == 'S' && gameBoard[0][3] == 'S' && gameBoard[0][4] == 'S' && gameBoard[1][2] == 'S' && gameBoard[1][3] == 'S' && gameBoard[1][4] == 'S' && gameBoard[2][2] == 'S' && gameBoard[2][3] == 'S' && gameBoard[2][4] == 'S') {
         return true;
-     }
-     else
+    } else
         return false;
 }
 
-    /*/// Check if a fox is surrounded by sheep.
+/*/// Check if a fox is surrounded by sheep.
 ///// This function checks to see if a fox is surrounded by sheep on all sides. If one is,
 ///// then it is captured. Its space becomes a '.' in the public "board.h" board array. */
 void foxSurrounded(char gameBoard[7][7])
 {
     ///// Find out where foxes are.
-	for (int x = 0; x < 7; x++)
-		for (int y = 0; y < 7; y++)
-		{
-			if (gameBoard[x][y] == 'F')
-			{
-				if ((gameBoard[x+1][y] == 'S') && (gameBoard[x-1][y] == 'S') &&
-					(gameBoard[x+1][y+1] == 'S') && (gameBoard[x+1][y-1] == 'S') &&
-					(gameBoard[x][y+1] == 'S') && (gameBoard[x][y-1] == 'S') &&
-					(gameBoard[x-1][y+1] == 'S') && (gameBoard[x-1][y-1] == 'S'))
-				{
-					gameBoard[x][y] = '.';
-				}
-			}
-		}
+    for (int x = 0; x < 7; x++)
+        for (int y = 0; y < 7; y++) {
+            if (gameBoard[x][y] == 'F') {
+                if ((gameBoard[x + 1][y] == 'S') && (gameBoard[x - 1][y] == 'S') &&
+                    (gameBoard[x + 1][y + 1] == 'S') && (gameBoard[x + 1][y - 1] == 'S') &&
+                    (gameBoard[x][y + 1] == 'S') && (gameBoard[x][y - 1] == 'S') &&
+                    (gameBoard[x - 1][y + 1] == 'S') && (gameBoard[x - 1][y - 1] == 'S')) {
+                    gameBoard[x][y] = '.';
+                }
+            }
+        }
 }
 
 /*/// Manage the game with all of the major functions.
@@ -50,45 +43,44 @@ void foxSurrounded(char gameBoard[7][7])
 void manageGame(istream& in)
 {
     ////// The game will loop until there is a winner.
-	/////// Create a char variable that will represent whether
-	/////// the game has ended or will continue as the winner, where 'F' will represent
-	/////// the foxes winning and 'S' will represent the sheep winning.
-	char gameDone = '-';
+    /////// Create a char variable that will represent whether
+    /////// the game has ended or will continue as the winner, where 'F' will represent
+    /////// the foxes winning and 'S' will represent the sheep winning.
+    char gameDone = '-';
 
-	board theBoard;
-	sheep theSheep;
-	fox foxes;
+    board theBoard;
+    sheep theSheep;
+    fox foxes;
 
-	theBoard.initializeBoardSetup();
-	theBoard.readBoard(in);
-	theBoard.printBoard();
-	while (gameDone == '-')
-	{
-		//////// Check number of sheep.
-		if (theSheep.numberOfSheep(theBoard.gameBoard) < 9)
-		{
-		    gameDone = 'F';
-		    break;
-		}
-		theSheep.userInput(theBoard.gameBoard, in);
-		theBoard.printBoard();
-		//////// Check "paddock" area for sheep.
-		if (paddockFilled(theBoard.gameBoard) == true)
-		{
-		    gameDone = 'S';
-		    break;
-		}
+    theBoard.initializeBoardSetup();
+    theBoard.readBoard(in);
+    theBoard.printBoard();
+    while (gameDone == '-') {
+        //////// Check number of sheep.
+        if (theSheep.numberOfSheep(theBoard.gameBoard) < 9) {
+            gameDone = 'F';
+            break;
+        }
+        theSheep.userInput(theBoard.gameBoard, in);
+        theBoard.printBoard();
+        //////// Check "paddock" area for sheep.
+        if (paddockFilled(theBoard.gameBoard) == true) {
+            gameDone = 'S';
+            break;
+        }
 
-		foxSurrounded(theBoard.gameBoard);
-		foxes.newFoxPosition(theBoard.gameBoard);
-		theBoard.printBoard();
-		// Test Driver
-		//break;
-	}
-	if (gameDone == 'S')
-        cout << "\nThe sheep win!" << endl << endl;
+        foxSurrounded(theBoard.gameBoard);
+        foxes.newFoxPosition(theBoard.gameBoard);
+        theBoard.printBoard();
+        // Test Driver
+        //break;
+    }
+    if (gameDone == 'S')
+        cout << "\nThe sheep win!" << endl
+             << endl;
     else if (gameDone == 'F')
-        cout << "\nThe foxes win!" << endl << endl;
+        cout << "\nThe foxes win!" << endl
+             << endl;
 }
 
 /*/// Manage the game with all of the major functions.
@@ -101,76 +93,70 @@ void manageGame(istream& in)
 gameStats manageTestGame(istream& in)
 {
     ////// The game will loop until there is a winner.
-	/////// Create a char variable that will represent whether
-	/////// the game has ended or will continue as the winner, where 'F' will represent
-	/////// the foxes winning and 'S' will represent the sheep winning.
-	char gameDone = '-';
+    /////// Create a char variable that will represent whether
+    /////// the game has ended or will continue as the winner, where 'F' will represent
+    /////// the foxes winning and 'S' will represent the sheep winning.
+    char gameDone = '-';
 
-	board theBoard;
-	sheep theSheep;
-	fox foxes;
+    board theBoard;
+    sheep theSheep;
+    fox foxes;
 
-	theBoard.initializeBoardSetup();
-	//cout << "initialized\n";
-	theBoard.readBoard(in);
-	//cout << "board read\n";
-	theBoard.printBoard();
-	//cout << "board printed\n";
-	while (gameDone == '-')
-	{
-		//////// Check number of sheep.
-		if (theSheep.numberOfSheep(theBoard.gameBoard) < 9)
-		{
-		    gameDone = 'F';
-		    break;
-		}
-		//theSheep.userInput(theBoard.gameBoard, in);
-		//theBoard.printBoard();
-		//////// Check "paddock" area for sheep.
-		if (paddockFilled(theBoard.gameBoard) == true)
-		{
-		    gameDone = 'S';
-		    break;
-		}
+    theBoard.initializeBoardSetup();
+    //cout << "initialized\n";
+    theBoard.readBoard(in);
+    //cout << "board read\n";
+    theBoard.printBoard();
+    //cout << "board printed\n";
+    while (gameDone == '-') {
+        //////// Check number of sheep.
+        if (theSheep.numberOfSheep(theBoard.gameBoard) < 9) {
+            gameDone = 'F';
+            break;
+        }
+        //theSheep.userInput(theBoard.gameBoard, in);
+        //theBoard.printBoard();
+        //////// Check "paddock" area for sheep.
+        if (paddockFilled(theBoard.gameBoard) == true) {
+            gameDone = 'S';
+            break;
+        }
 
-		foxSurrounded(theBoard.gameBoard);
-		foxes.newFoxPosition(theBoard.gameBoard);
-		theBoard.printBoard();
+        foxSurrounded(theBoard.gameBoard);
+        foxes.newFoxPosition(theBoard.gameBoard);
+        theBoard.printBoard();
 
-		//////// Check number of sheep.
-		if (theSheep.numberOfSheep(theBoard.gameBoard) < 9)
-		{
-		    gameDone = 'F';
-		    break;
-		}
-		//theSheep.userInput(theBoard.gameBoard, in);
-		//theBoard.printBoard();
-		//////// Check "paddock" area for sheep.
-		if (paddockFilled(theBoard.gameBoard) == true)
-		{
-		    gameDone = 'S';
-		    break;
-		}
+        //////// Check number of sheep.
+        if (theSheep.numberOfSheep(theBoard.gameBoard) < 9) {
+            gameDone = 'F';
+            break;
+        }
+        //theSheep.userInput(theBoard.gameBoard, in);
+        //theBoard.printBoard();
+        //////// Check "paddock" area for sheep.
+        if (paddockFilled(theBoard.gameBoard) == true) {
+            gameDone = 'S';
+            break;
+        }
 
-		// Test Driver
-		break;
-	}
+        // Test Driver
+        break;
+    }
 
-	gameStats stats;
-	stats.gameOver = false;
-	stats.numFoxes = foxes.numberOfFoxes(theBoard.gameBoard);
-	stats.numSheep = theSheep.numberOfSheep(theBoard.gameBoard);
-	stats.winner = '-';
+    gameStats stats;
+    stats.gameOver = false;
+    stats.numFoxes = foxes.numberOfFoxes(theBoard.gameBoard);
+    stats.numSheep = theSheep.numberOfSheep(theBoard.gameBoard);
+    stats.winner = '-';
 
-	if (gameDone == 'S')
-    {
-        cout << "\nThe sheep win!" << endl << endl;
+    if (gameDone == 'S') {
+        cout << "\nThe sheep win!" << endl
+             << endl;
         stats.gameOver = true;
         stats.winner = 'S';
-    }
-    else if (gameDone == 'F')
-    {
-        cout << "\nThe foxes win!" << endl << endl;
+    } else if (gameDone == 'F') {
+        cout << "\nThe foxes win!" << endl
+             << endl;
         stats.gameOver = true;
         stats.winner = 'F';
     }
@@ -183,66 +169,59 @@ gameStats manageTestGame(istream& in)
 bool validUserInput(char gameBoard[7][7], std::istream& in)
 {
     ///// Create 5 variables to read the input of the user, initial position - moving position.
-	char oldPos = 'x', dash = '-', newPos = 'y';
-	int oldPosition = 0, newPosition = 0;
+    char oldPos = 'x', dash = '-', newPos = 'y';
+    int oldPosition = 0, newPosition = 0;
 
-	///// Create an array to match the letters that represent the game gameBoard columns with
-	///// the two-dimensional gameBoard array.
-	char letterArray[7] = {'a', 'b', 'c', 'd', 'e', 'f', 'g'};
-	///// Create an array to match the numbers that represent the game gameBoard rows with
-	///// the two-dimensional gameBoard array.
-	int numberArray[7] = {7, 6, 5, 4, 3, 2, 1};
+    ///// Create an array to match the letters that represent the game gameBoard columns with
+    ///// the two-dimensional gameBoard array.
+    char letterArray[7] = {'a', 'b', 'c', 'd', 'e', 'f', 'g'};
+    ///// Create an array to match the numbers that represent the game gameBoard rows with
+    ///// the two-dimensional gameBoard array.
+    int numberArray[7] = {7, 6, 5, 4, 3, 2, 1};
 
-	///// Prompt user for input and read data into variables.
-	board theBoard(gameBoard);
-	theBoard.printBoard();
-	cout << "\nYour move? ";
-	in >> oldPos >> oldPosition >> dash >> newPos >> newPosition;
-	cout << oldPos << oldPosition << dash << newPos << newPosition;
-	///// Match oldPos, newPos, oldPosition, and newPosition with the letter and number arrays,
-	///// and store those values in new variables
-	int columnOld = 0, rowOld = 0, columnNew = 0, rowNew = 0;
-	for (int x = 0; x < 7; x++)
-	{
-		if (oldPos == letterArray[x])
-			columnOld = x;
-		if (oldPosition == numberArray[x])
-			rowOld = x;
-		if (newPos == letterArray[x])
-			columnNew = x;
-		if (newPosition == numberArray[x])
-			rowNew = x;
-	}
-	///// Check the new gameBoard array position to see if it's a legal move
-	if (gameBoard[rowOld][columnOld] != 'S')
-	{
-	    cout << "\nThat is not a legal move.\n";
-	    return false;
-	}
-	if ((columnNew < 0 || columnNew > 6) || (rowNew < 0 || rowNew > 6))
-    {
+    ///// Prompt user for input and read data into variables.
+    board theBoard(gameBoard);
+    theBoard.printBoard();
+    cout << "\nYour move? ";
+    in >> oldPos >> oldPosition >> dash >> newPos >> newPosition;
+    cout << oldPos << oldPosition << dash << newPos << newPosition;
+    ///// Match oldPos, newPos, oldPosition, and newPosition with the letter and number arrays,
+    ///// and store those values in new variables
+    int columnOld = 0, rowOld = 0, columnNew = 0, rowNew = 0;
+    for (int x = 0; x < 7; x++) {
+        if (oldPos == letterArray[x])
+            columnOld = x;
+        if (oldPosition == numberArray[x])
+            rowOld = x;
+        if (newPos == letterArray[x])
+            columnNew = x;
+        if (newPosition == numberArray[x])
+            rowNew = x;
+    }
+    ///// Check the new gameBoard array position to see if it's a legal move
+    if (gameBoard[rowOld][columnOld] != 'S') {
+        cout << "\nThat is not a legal move.\n";
+        return false;
+    }
+    if ((columnNew < 0 || columnNew > 6) || (rowNew < 0 || rowNew > 6)) {
         cout << "\nThat is not a legal move.\n";
         return false;
     }
 
     if ((gameBoard[rowNew][columnNew] != '.') ||
-    (((rowNew == rowOld + 1) && (columnNew == columnOld)) || ((rowNew == rowOld + 1) && (columnNew == columnOld + 1))
-    || ((rowNew == rowOld + 1) && (columnNew == columnOld - 1)) || ((rowNew == rowOld - 1) && (columnNew == columnOld - 1))
-    || ((rowNew == rowOld - 1) && (columnNew == columnOld + 1))) || ((rowNew > rowOld + 1) || (rowNew < rowOld - 1)
-    || (columnNew > columnOld + 1) || (columnNew < columnOld - 1)))
-    {
+        (((rowNew == rowOld + 1) && (columnNew == columnOld)) || ((rowNew == rowOld + 1) && (columnNew == columnOld + 1)) || ((rowNew == rowOld + 1) && (columnNew == columnOld - 1)) || ((rowNew == rowOld - 1) && (columnNew == columnOld - 1)) || ((rowNew == rowOld - 1) && (columnNew == columnOld + 1))) || ((rowNew > rowOld + 1) || (rowNew < rowOld - 1) || (columnNew > columnOld + 1) || (columnNew < columnOld - 1))) {
 
         cout << "\nThat is not a legal move.\n";
         return false;
     }
 
 
-	////// Set the new gameBoard position to 'S' and change the old position to '.'
-	gameBoard[rowNew][columnNew] = 'S';
-	gameBoard[rowOld][columnOld] = '.';
+    ////// Set the new gameBoard position to 'S' and change the old position to '.'
+    gameBoard[rowNew][columnNew] = 'S';
+    gameBoard[rowOld][columnOld] = '.';
 
-	board newBoard(gameBoard);
-	newBoard.printBoard();
+    board newBoard(gameBoard);
+    newBoard.printBoard();
 
-	return true;
+    return true;
 }

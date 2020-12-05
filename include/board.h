@@ -6,8 +6,7 @@
 class board
 {
 
-    public:
-
+public:
     board();
     board(char board[7][7]);
 
@@ -28,8 +27,6 @@ class board
     // This function is the driver(tester) of the program that will allow the user
     // to enter the initial board positions and read them from standard input or from a file.
     void readBoard(std::istream& in);
-
-
 };
 
 

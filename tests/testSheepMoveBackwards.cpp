@@ -1,9 +1,9 @@
-#include <iostream>
+#include "manager.h"
+#include <assert.h>
 #include <fstream>
+#include <iostream>
 #include <sstream>
 #include <string>
-#include <assert.h>
-#include "manager.h"
 
 using namespace std;
 
@@ -65,14 +65,12 @@ int main(int argc, char** argv)
     /*board gameBoard (theBoard);
     gameBoard.printBoard();*/
 
-	string input = "d4-d3";
+    string input = "d4-d3";
 
-	istringstream str(input);
+    istringstream str(input);
 
-    if (!validUserInput(theBoard, str))
-    {
+    if (!validUserInput(theBoard, str)) {
         return 0;
-    }
-    else
+    } else
         return 1;
 }

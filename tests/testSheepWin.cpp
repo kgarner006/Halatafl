@@ -1,9 +1,9 @@
-#include <iostream>
+#include "manager.h"
+#include <assert.h>
 #include <fstream>
+#include <iostream>
 #include <sstream>
 #include <string>
-#include <assert.h>
-#include "manager.h"
 
 using namespace std;
 
@@ -11,18 +11,14 @@ using namespace std;
 int main(int argc, char** argv)
 {
     //// Call the manageTestGame function to retrieve the game status after giving board input.
-	string input = "SSSSSS..SSS................SSSSSS";
+    string input = "SSSSSS..SSS................SSSSSS";
 
-	istringstream str(input);
+    istringstream str(input);
 
     gameStats stats = manageTestGame(str);
 
-    if ((stats.gameOver)
-    && (stats.numSheep >= 9)
-    && (stats.winner == 'S'))
-    {
+    if ((stats.gameOver) && (stats.numSheep >= 9) && (stats.winner == 'S')) {
         return 0;
-    }
-    else
+    } else
         return 1;
 }

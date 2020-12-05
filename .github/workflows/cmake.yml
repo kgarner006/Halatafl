@@ -1,6 +1,6 @@
 name: CMake
 
-on: [push]
+on: [ push ]
 
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
@@ -17,6 +17,10 @@ jobs:
         shell: bash
         run: sudo apt-get update && sudo apt-get install clang-tidy cppcheck clang-format-10
 
+      - name: Run ClangFormat
+        shell: bash
+        run: clang-format-10 --dry-run --Werror --verbose -i -style=file Sources/* include/* tests/*
+
       - name: Run ClangTidy
         shell: bash
         run: clang-tidy Sources/* -- -Iinclude
@@ -24,10 +28,6 @@ jobs:
       - name: Run Cppcheck
         shell: bash
         run: cppcheck --enable=all --check-config --suppress=missingIncludeSystem Sources/ -Iinclude
-
-      - name: Run ClangFormat
-        shell: bash
-        run: clang-format-10 --version && clang-format-10 --help && clang-format-10 --dry-run --Werror --verbose -i -style=file Sources/* include/*
 
       - name: Create Build Environment
         run: cmake -E make_directory ${{runner.workspace}}/build
