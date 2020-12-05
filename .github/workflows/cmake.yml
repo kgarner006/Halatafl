@@ -13,14 +13,17 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Install-Clang-Tidy
-      working-directory: ${{runner.workspace}}
+    - name: Install-Static-Analysis-Tools
       shell: bash
-      run: sudo apt-get update && sudo apt-get install clang-tidy
+      run: sudo apt-get update && sudo apt-get install clang-tidy cppcheck
     
     - name: Run-Clang-Tidy
       shell: bash
       run: clang-tidy Sources/* -- -Iinclude
+    
+    - name: Run-Cpp-check
+      shell: bash
+      run: cppcheck --enable=all --check-config --suppress=missingIncludeSystem --bug-hunting Sources/ -Iinclude
 
     - name: Create-Build-Environment
       run: cmake -E make_directory ${{runner.workspace}}/build
