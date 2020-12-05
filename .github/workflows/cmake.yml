@@ -15,7 +15,7 @@ jobs:
 
       - name: Install Static Analysis tools
         shell: bash
-        run: sudo apt-get update && sudo apt-get install clang-tidy cppcheck clang-format-11
+        run: sudo apt-get update && sudo apt-get install clang-tidy cppcheck clang-format-10
 
       - name: Run ClangTidy
         shell: bash
@@ -27,7 +27,7 @@ jobs:
 
       - name: Run ClangFormat
         shell: bash
-        run: clang-format --dry-run --Werror --verbose -i -style=file Sources/* include/*
+        run: clang-format --version && clang-format --help && clang-format --dry-run --Werror --verbose -i -style=file Sources/* include/*
 
       - name: Create Build Environment
         run: cmake -E make_directory ${{runner.workspace}}/build
