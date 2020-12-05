@@ -27,7 +27,7 @@ jobs:
 
       - name: Run ClangFormat
         shell: bash
-        run: clang-format --version && clang-format --help && clang-format --dry-run --Werror --verbose -i -style=file Sources/* include/*
+        run: clang-format-10 --version && clang-format-10 --help && clang-format-10 --dry-run --Werror --verbose -i -style=file Sources/* include/*
 
       - name: Create Build Environment
         run: cmake -E make_directory ${{runner.workspace}}/build
