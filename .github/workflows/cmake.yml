@@ -52,4 +52,4 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: Halatafl
-          path: ${{runner.workspace}}/build
+          path: ${{runner.workspace}}/build/Halatafl
