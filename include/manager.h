@@ -40,8 +40,10 @@ gameStats manageTestGame(std::istream& in);
 
 /*/// This function reads the user's input, tests whether or not the new position they entered
 //// is legal, and if it is, the new position in the "board.h" public board array gets changed to 'S'
-//// and this function returns true. If the new position the user entered was illegal, then it will return false.*/
-bool validUserInput(char gameBoard[7][7], std::istream& in);
+//// and this function returns true. If the new position the user entered was illegal, then it will return false.
+//// If speedHalatafl is being played, then the time taken to enter the move is determined by sleepTime.
+//// If the time taken to enter a move is more than 20 seconds, this function will return false.*/
+bool validUserInput(char gameBoard[7][7], std::istream& in, bool speedHalatafl, unsigned sleepTime);
 
 
 #endif // MANAGER_H_INCLUDED
