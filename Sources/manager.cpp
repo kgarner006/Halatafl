@@ -201,21 +201,25 @@ bool validUserInput(char gameBoard[7][7], std::istream& in, bool speedHalatafl, 
 
     // Timer variables for Blitz (speed) Halatafl
     clock_t start;
-    double duration = 0;
+    int duration = 0;
 
     ///// Prompt user for input and read data into variables.
     board theBoard(gameBoard);
     theBoard.printBoard();
     cout << "\nYour move? ";
     if (speedHalatafl){
-        start = clock();
-        sleep(sleepTime);
+        while (duration < sleepTime) {
+            sleep(1);
+            duration++;   
+        }
+        //start = clock();
+        //sleep(sleepTime);
     }
     in >> oldPos >> oldPosition >> dash >> newPos >> newPosition;
     if (speedHalatafl) {
-        duration = (clock() - start) / (double) CLOCKS_PER_SEC;
-        cout << duration << endl;
-        if (duration > 20) {
+        //duration = (clock() - start) / (double) CLOCKS_PER_SEC;
+        //cout << duration << endl;
+        if (duration >= 20) {
             cout << oldPos << oldPosition << dash << newPos << newPosition;
             cout << "\nTime up! You took too long (" << duration << " seconds) to make a move!\n";
             cout << "\nThe foxes win!" << endl << endl;
