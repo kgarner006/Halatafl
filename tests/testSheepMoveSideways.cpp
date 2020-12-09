@@ -69,7 +69,7 @@ int main(int argc, char** argv)
 
     istringstream str(input);
 
-    if (validUserInput(theBoard, str)) {
+    if (validUserInput(theBoard, str, false, 0)) {
         return 0;
     } else
         return 1;
