@@ -19,8 +19,23 @@ jobs:
 
       - name: Run ClangFormat
         shell: bash
-        run: clang-format-10 --dry-run --Werror --verbose -i -style=file Sources/* include/* tests/*
-
+        run: clang-format-10 --verbose -i -style=file Sources/* include/* tests/*
+      
+      - uses: actions/upload-artifact@v2
+        with:
+          name: tests
+          path: ${{runner.workspace}}/tests
+      
+      - uses: actions/upload-artifact@v2
+        with:
+          name: include
+          path: ${{runner.workspace}}/include
+          
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Sources
+          path: ${{runner.workspace}}/Sources
+      
       - name: Run ClangTidy
         shell: bash
         run: clang-tidy Sources/* -- -Iinclude
