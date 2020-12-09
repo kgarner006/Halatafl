@@ -1,5 +1,7 @@
 #include "manager.h"
 #include <iostream>
+#include <unistd.h>
+#include <ctime>
 
 using namespace std;
 
@@ -55,13 +57,31 @@ void manageGame(istream& in)
     theBoard.initializeBoardSetup();
     theBoard.readBoard(in);
     theBoard.printBoard();
+
+    bool speedHalatafl = false;
+    char speedAnswer = '-';
+    double duration = 0;
+    cout << "\n\nBlitz (Speed - 20 second turns) Halatafl? (Y or N) ";
+    cin >> speedAnswer;
+    while (speedAnswer != 'Y' && speedAnswer != 'y' && speedAnswer != 'N' && speedAnswer != 'n') {
+        cout << "Invalid Response. Blitz (Speed - 20 second turns) Halatafl? (Y or N) ";
+        cin >> speedAnswer;
+    }
+    if (speedAnswer == 'Y' || speedAnswer == 'y')
+        speedHalatafl = true;
+
     while (gameDone == '-') {
         //////// Check number of sheep.
         if (theSheep.numberOfSheep(theBoard.gameBoard) < 9) {
             gameDone = 'F';
             break;
         }
-        theSheep.userInput(theBoard.gameBoard, in);
+        if (!theSheep.userInput(theBoard.gameBoard, in, speedHalatafl, duration)) {
+            gameDone = 'F';
+            cout << "\nTime up! You took too long (" << duration << " seconds) to make a move!\n";
+            break;
+        }
+
         theBoard.printBoard();
         //////// Check "paddock" area for sheep.
         if (paddockFilled(theBoard.gameBoard) == true) {
@@ -166,7 +186,7 @@ gameStats manageTestGame(istream& in)
 /*/// This function reads the user's input, tests whether or not the new position they entered
 //// is legal, and if it is, the new position in the "board.h" public board array gets changed to 'S'
 //// and this function returns true. If the new position the user entered was illegal, then it will return false.*/
-bool validUserInput(char gameBoard[7][7], std::istream& in)
+bool validUserInput(char gameBoard[7][7], std::istream& in, bool speedHalatafl, unsigned sleepTime)
 {
     ///// Create 5 variables to read the input of the user, initial position - moving position.
     char oldPos = 'x', dash = '-', newPos = 'y';
@@ -179,11 +199,29 @@ bool validUserInput(char gameBoard[7][7], std::istream& in)
     ///// the two-dimensional gameBoard array.
     int numberArray[7] = {7, 6, 5, 4, 3, 2, 1};
 
+    // Timer variables for Blitz (speed) Halatafl
+    clock_t start;
+    double duration = 0;
+
     ///// Prompt user for input and read data into variables.
     board theBoard(gameBoard);
     theBoard.printBoard();
     cout << "\nYour move? ";
+    if (speedHalatafl){
+        start = clock();
+        sleep(sleepTime);
+    }
     in >> oldPos >> oldPosition >> dash >> newPos >> newPosition;
+    if (speedHalatafl) {
+        duration = (clock() - start) / (double) CLOCKS_PER_SEC;
+        //cout << duration << endl;
+        if (duration > 20) {
+            cout << oldPos << oldPosition << dash << newPos << newPosition;
+            cout << "\nTime up! You took too long (" << duration << " seconds) to make a move!\n";
+            cout << "\nThe foxes win!" << endl << endl;
+            return false;
+        }
+    }
     cout << oldPos << oldPosition << dash << newPos << newPosition;
     ///// Match oldPos, newPos, oldPosition, and newPosition with the letter and number arrays,
     ///// and store those values in new variables
