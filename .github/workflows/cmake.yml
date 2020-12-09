@@ -19,7 +19,7 @@ jobs:
 
       - name: Run ClangFormat
         shell: bash
-        run: clang-format-10 --verbose -i -style=file Sources/* include/* tests/*
+        run: clang-format-10 --verbose -i -style=file Sources/* include/* tests/* && pwd && ls
       
       - uses: actions/upload-artifact@v2
         with:
