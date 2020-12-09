@@ -214,7 +214,7 @@ bool validUserInput(char gameBoard[7][7], std::istream& in, bool speedHalatafl, 
     in >> oldPos >> oldPosition >> dash >> newPos >> newPosition;
     if (speedHalatafl) {
         duration = (clock() - start) / (double) CLOCKS_PER_SEC;
-        //cout << duration << endl;
+        cout << duration << endl;
         if (duration > 20) {
             cout << oldPos << oldPosition << dash << newPos << newPosition;
             cout << "\nTime up! You took too long (" << duration << " seconds) to make a move!\n";
