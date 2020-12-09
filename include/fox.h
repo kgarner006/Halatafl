@@ -1,14 +1,15 @@
 #ifndef FOX_H_INCLUDED
 #define FOX_H_INCLUDED
 
+#include <iostream>
 #include "board.h"
 #include "sheep.h"
-#include <iostream>
 #include <vector>
 
 class fox
 {
-public:
+    public:
+
     fox();
 
     // Function used to calculate and return number of foxes on game board
@@ -23,8 +24,9 @@ public:
     //// The fox move is output.*/
     void newFoxPosition(char gameBoard[7][7]);
 
-private:
-    struct aFox {
+    private:
+    struct aFox
+    {
         int numCaptured;
         int numThreatened;
         int rowCo;
@@ -34,7 +36,8 @@ private:
         char tempBoard[7][7];
     };
 
-    struct aMove {
+    struct aMove
+    {
         int row;
         int column;
     };
@@ -42,16 +45,19 @@ private:
     // This struct includes a vector of aMove
     // structs for the co-ordinates along with a number
     // to keep count of those aMove structs that it's creating.
-    struct theMoves {
+    struct theMoves
+    {
         std::vector<aMove> moves;
         int numCap;
         char theBoard[7][7];
     };
 
-    struct threats {
+    struct threats
+    {
         aMove moveSet;
         int numThreatened;
     };
+
 };
 
 

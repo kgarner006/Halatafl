@@ -2,12 +2,12 @@
 
 using namespace std;
 
-board::board() {}
+board::board(){}
 
 board::board(char theBoard[7][7])
 {
-    for (int x = 0; x < 7; x++)
-        for (int y = 0; y < 7; y++)
+    for(int x = 0; x < 7; x++)
+        for(int y = 0; y < 7; y++)
             gameBoard[x][y] = theBoard[x][y];
 }
 
@@ -16,8 +16,9 @@ board::board(char theBoard[7][7])
 /// array of char as a parameter which will be filled with '-' characters.*/
 void board::initializeBoardSetup()
 {
-    for (int x = 0; x < 7; x++) {
-        for (int y = 0; y < 7; y++)
+    for(int x = 0; x < 7; x++)
+    {
+        for(int y = 0; y < 7; y++)
             board::gameBoard[x][y] = '-';
     }
 }
@@ -46,13 +47,16 @@ void board::printBoard()
 }
 
 // This function is the driver(tester) of the program that will allow the user
-// to enter the initial board positions and read them from standard input or from a file.
+    // to enter the initial board positions and read them from standard input or from a file.
 void board::readBoard(istream& in)
 {
     // ROWS ONE AND TWO
-    for (int num = 0; num < 2; num++) {
-        for (int x = 2; x < 5; x++) {
-            while ((in.peek() == '-') || (in.peek() == '/') || (in.peek() == '\\') || (in.peek() == '|')) {
+    for (int num = 0; num < 2; num++)
+    {
+        for (int x = 2; x < 5; x++)
+        {
+            while ((in.peek() == '-') || (in.peek() == '/') || (in.peek() == '\\') || (in.peek() == '|'))
+            {
                 in.ignore();
             }
             in >> gameBoard[num][x];
@@ -60,9 +64,12 @@ void board::readBoard(istream& in)
     }
 
     // ROWS THREE, FOUR, AND FIVE
-    for (int num = 2; num < 5; num++) {
-        for (int x = 0; x < 7; x++) {
-            while ((in.peek() == '-') || (in.peek() == '/') || (in.peek() == '\\') || (in.peek() == '|')) {
+    for (int num = 2; num < 5; num++)
+    {
+        for (int x = 0; x < 7; x++)
+        {
+            while ((in.peek() == '-') || (in.peek() == '/') || (in.peek() == '\\') || (in.peek() == '|'))
+            {
                 in.ignore();
             }
             in >> gameBoard[num][x];
@@ -70,9 +77,12 @@ void board::readBoard(istream& in)
     }
 
     // ROWS FIVE AND SIX
-    for (int num = 5; num < 7; num++) {
-        for (int x = 2; x < 5; x++) {
-            while ((in.peek() == '-') || (in.peek() == '/') || (in.peek() == '\\') || (in.peek() == '|')) {
+    for (int num = 5; num < 7; num++)
+    {
+        for (int x = 2; x < 5; x++)
+        {
+            while ((in.peek() == '-') || (in.peek() == '/') || (in.peek() == '\\') || (in.peek() == '|'))
+            {
                 in.ignore();
             }
             in >> gameBoard[num][x];
