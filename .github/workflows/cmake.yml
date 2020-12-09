@@ -24,17 +24,17 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: tests
-          path: ${{runner.workspace}}/tests/*.cpp
+          path: tests/*.cpp
       
       - uses: actions/upload-artifact@v2
         with:
           name: include
-          path: ${{runner.workspace}}/include/*.h
+          path: include/*.h
           
       - uses: actions/upload-artifact@v2
         with:
           name: Sources
-          path: ${{runner.workspace}}/Sources/*.cpp
+          path: Sources/*.cpp
       
       - name: Run ClangTidy
         shell: bash
