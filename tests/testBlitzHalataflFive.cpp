@@ -1,9 +1,9 @@
-#include <iostream>
+#include "manager.h"
+#include <assert.h>
 #include <fstream>
+#include <iostream>
 #include <sstream>
 #include <string>
-#include <assert.h>
-#include "manager.h"
 
 using namespace std;
 
@@ -69,10 +69,8 @@ int main(int argc, char** argv)
 
     istringstream str(input);
 
-      if (validUserInput(theBoard, str, true, 5))
-      {
-          return 0;
-      }
-      else
-          return 1;
+    if (validUserInput(theBoard, str, true, 5)) {
+        return 0;
+    } else
+        return 1;
 }

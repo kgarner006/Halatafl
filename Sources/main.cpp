@@ -1,7 +1,7 @@
-#include <iostream>
-#include <fstream>
-#include <string>
 #include "manager.h"
+#include <fstream>
+#include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -9,13 +9,11 @@ using namespace std;
 int main(int argc, char** argv)
 {
     //// Call the manageGame function and end the program when manageGame is done.
-	if (argc > 1)
-	{
-	    ifstream in (argv[1]);
+    if (argc > 1) {
+        ifstream in(argv[1]);
 
         manageGame(in);
-	}
-	else
+    } else
         manageGame(cin);
 
 
